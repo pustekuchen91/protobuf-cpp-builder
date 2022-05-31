@@ -56,7 +56,9 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <io.h>
+//#if !defined(__BORLANDC__)
 #include <sys/stat.h>
+//#endif
 #include <sys/types.h>
 #include <wctype.h>
 
@@ -312,7 +314,11 @@ int stat(const char* path, struct _stat* buffer) {
     errno = ENOENT;
     return -1;
   }
+  #if defined(__BORLANDC__)
   return ::_wstat(wpath.c_str(), buffer);
+  #else
+  return ::_wstat(wpath.c_str(), buffer);
+  #endif
 #else   // not SUPPORT_LONGPATHS
   return ::_stat(path, buffer);
 #endif  // not SUPPORT_LONGPATHS
@@ -350,7 +356,13 @@ int read(int fd, void* buffer, size_t size) {
   return ::_read(fd, buffer, size);
 }
 
-int setmode(int fd, int mode) { return ::_setmode(fd, mode); }
+int setmode(int fd, int mode) {
+#if defined(__BORLANDC__)
+    return ::setmode(fd,mode);
+#else
+    return ::_setmode(fd, mode);
+#endif
+}
 
 int write(int fd, const void* buffer, size_t size) {
   return ::_write(fd, buffer, size);

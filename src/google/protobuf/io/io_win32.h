@@ -64,6 +64,7 @@ namespace protobuf {
 namespace io {
 namespace win32 {
 
+
 PROTOBUF_EXPORT FILE* fopen(const char* path, const char* mode);
 PROTOBUF_EXPORT int access(const char* path, int mode);
 PROTOBUF_EXPORT int chdir(const char* path);
@@ -74,9 +75,12 @@ PROTOBUF_EXPORT int mkdir(const char* path, int _mode);
 PROTOBUF_EXPORT int open(const char* path, int flags, int mode = 0);
 PROTOBUF_EXPORT int read(int fd, void* buffer, size_t size);
 PROTOBUF_EXPORT int setmode(int fd, int mode);
+#if !defined(__BORLANDC__)
 PROTOBUF_EXPORT int stat(const char* path, struct _stat* buffer);
+#endif
 PROTOBUF_EXPORT int write(int fd, const void* buffer, size_t size);
 PROTOBUF_EXPORT std::wstring testonly_utf8_to_winpath(const char* path);
+
 
 enum class ExpandWildcardsResult {
   kSuccess = 0,

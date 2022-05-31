@@ -243,7 +243,7 @@
 #endif
 #if PROTOBUF_GNUC_MIN(3, 1)
 # define PROTOBUF_NOINLINE __attribute__((noinline))
-#elif defined(_MSC_VER)
+#elif defined(_MSC_VER) || defined(__BORLANDC__)
 // Seems to have been around since at least Visual Studio 2005
 # define PROTOBUF_NOINLINE __declspec(noinline)
 #endif
@@ -602,7 +602,7 @@
 #ifdef PROTOBUF_THREAD_LOCAL
 #error PROTOBUF_THREAD_LOCAL was previously defined
 #endif
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) || defined(__BORLANDC__)
 #define PROTOBUF_THREAD_LOCAL __declspec(thread)
 #else
 #define PROTOBUF_THREAD_LOCAL __thread
