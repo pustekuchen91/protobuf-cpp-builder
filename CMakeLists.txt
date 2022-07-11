@@ -200,7 +200,7 @@ endif (HAVE_ZLIB)
 # We need to link with libatomic on systems that do not have builtin atomics, or
 # don't have builtin support for 8 byte atomics
 set(protobuf_LINK_LIBATOMIC false)
-if (NOT MSVC)
+if (NOT MSVC AND NOT BORLAND)
   include(CheckCXXSourceCompiles)
   set(OLD_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
   set(CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS} -std=c++11)
