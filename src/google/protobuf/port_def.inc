@@ -446,7 +446,7 @@
 #error PROTOBUF_EXPORT was previously defined
 #endif
 
-#if defined(PROTOBUF_USE_DLLS) && defined(_MSC_VER)
+#if defined(PROTOBUF_USE_DLLS) && (defined(_MSC_VER) || defined(__BORLANDC__))
 # if defined(LIBPROTOBUF_EXPORTS)
 #  define PROTOBUF_EXPORT __declspec(dllexport)
 #  define PROTOBUF_EXPORT_TEMPLATE_DECLARE
@@ -470,7 +470,7 @@
 #error PROTOC_EXPORT was previously defined
 #endif
 
-#if defined(PROTOBUF_USE_DLLS) && defined(_MSC_VER)
+#if defined(PROTOBUF_USE_DLLS) && (defined(_MSC_VER) || defined(__BORLANDC__))
 # if defined(LIBPROTOC_EXPORTS)
 #  define PROTOC_EXPORT __declspec(dllexport)
 # else
