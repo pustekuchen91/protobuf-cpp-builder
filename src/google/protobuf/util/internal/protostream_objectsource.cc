@@ -861,7 +861,7 @@ util::Status ProtoStreamObjectSource::RenderNonMessageField(
             ow->RenderInt32(field_name, buffer32);
           } else if (render_options_.use_lower_camel_for_enums) {
             ow->RenderString(field_name,
-                             EnumValueNameToLowerCamelCase(enum_value->name()));
+                             (enum_value->name()));
           } else {
             ow->RenderString(field_name, enum_value->name());
           }
